@@ -1,0 +1,202 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "First Demonstration.",
+    "version": "1.0.0",
+    "title": "HighS",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "wujood@gmx.de"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "wujood.ddns.net:8080",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "highscore",
+      "description": "Everything about your HighS",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/highscore": {
+      "post": {
+        "tags": [
+          "highscore"
+        ],
+        "summary": "Add a new highscoreboard to the database",
+        "description": "",
+        "operationId": "addHighscoreBoard",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "highscoreBoard",
+            "in": "body",
+            "description": "The name of the Highscore Board that will be created. (This is not a ID of any sort!)",
+            "schema": {
+              "$ref": "#/definitions/HighscoreBoard"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/HighscoreBoardCreatedResponse"
+            }
+          }
+        }
+      }
+    },
+    "/highscore/{highscoreId}": {
+      "get": {
+        "tags": [
+          "highscore"
+        ],
+        "summary": "Find HighscoreBoard by ID",
+        "description": "Returns a single HighscoreBoard",
+        "operationId": "getHighscoreBoardById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "highscoreId",
+            "in": "path",
+            "description": "ID of HighscoreBoard to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/HighscoreBoard"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "HighscoreBoard not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "highscore"
+        ],
+        "summary": "Inserts a new entry into the highscore board.",
+        "description": "",
+        "operationId": "newEntry",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "highscoreId",
+            "in": "path",
+            "description": "ID of HighscoreBoard to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "highscoreBoardEntry",
+            "in": "body",
+            "description": "Entry to a HighscoreBoard",
+            "schema": {
+              "$ref": "#/definitions/HighscoreBoardEntry"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "HighscoreBoard": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HighscoreBoardEntry"
+          }
+        }
+      },
+      "xml": {
+        "name": "HighscoreBoardCreatedResponse"
+      }
+    },
+    "HighscoreBoardCreatedResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "apikey": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "HighscoreBoardCreatedResponse"
+      }
+    },
+    "HighscoreBoardEntry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "username": {
+          "type": "string"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "xml": {
+        "name": "HighscoreBoardEntry"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about the open Highscore-Board Projekt",
+    "url": "https://nerd-labor.de"
+  }
+}

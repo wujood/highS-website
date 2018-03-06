@@ -1,0 +1,10 @@
+
+<input matInput placeholder="Name of the Highscore Board" [(ngModel)]="name">
+<button mat-raised-button (click)="createNewHighscoreBoard()">Click me!</button>
+
+<div>
+  <mat-card *ngIf="created">
+    API-Key: {{apikey}}
+    ID: {{id}}
+  </mat-card>
+</div>
