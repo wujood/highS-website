@@ -9,7 +9,7 @@ import { BoardDataService } from '../../services/board-data.service';
 })
 export class ViewComponent implements OnInit {
 
-  private list = [];
+  list = [];
 
   constructor(public boardData: BoardDataService, private swaggerService: HighscoreService) { }
 

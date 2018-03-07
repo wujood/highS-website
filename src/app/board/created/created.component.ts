@@ -9,7 +9,7 @@ import { BoardDataService } from '../../services/board-data.service';
 })
 export class CreatedComponent implements OnInit {
 
-  private boardCreated: HighscoreBoardCreatedResponse;
+  boardCreated: HighscoreBoardCreatedResponse;
 
   constructor(public board: BoardDataService) { }
 
