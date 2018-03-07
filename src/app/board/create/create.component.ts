@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HighscoreService, HighscoreBoardCreatedResponse } from '../../../swagger';
+import { HighscoreBoardCreatedResponse } from '../../../swagger';
+import { BoardDataService } from '../../services/board-data.service';
 
 @Component({
   selector: 'app-create',
@@ -9,24 +10,17 @@ import { HighscoreService, HighscoreBoardCreatedResponse } from '../../../swagge
 export class CreateComponent implements OnInit {
 
   public name: string;
-  private created = false;
-  private id:number;
-  private apikey:string;
-  constructor(public swagger: HighscoreService) { }
+
+  constructor(public board: BoardDataService) { }
 
   ngOnInit() {
-
   }
 
   createNewHighscoreBoard() {
-    this.swagger.addHighscoreBoard({
-      name: this.name,
-      id: 0,
-      entries: []
-    }). subscribe ((result: HighscoreBoardCreatedResponse) => {
-      this.apikey = result.apikey;
-      this.id = result.id;
-      this.created = true;
-    });
+    if(this.name === null || this.name === undefined) {
+      console.error("Name not set!");
+      return;
+    }
+    this.board.addHighscoreBoard(this.name);
   }
 }

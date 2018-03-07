@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HighscoreService, HighscoreBoard } from '../../../swagger';
+import { HighscoreService, HighscoreBoard, HighscoreBoardCreatedResponse } from '../../../swagger';
+import { BoardDataService } from '../../services/board-data.service';
 
 @Component({
   selector: 'app-view',
@@ -8,16 +9,29 @@ import { HighscoreService, HighscoreBoard } from '../../../swagger';
 })
 export class ViewComponent implements OnInit {
 
-  list = [];
+  private list = [];
 
-  constructor(public swagger: HighscoreService) { }
+  constructor(public boardData: BoardDataService, private swaggerService: HighscoreService) { }
 
   ngOnInit() {
-    this.swagger.getHighscoreBoardById(0).subscribe((result: HighscoreBoard) => {
-      result.entries.forEach(entry => {
-        this.list.push(entry.username + ': ' + entry.score.toString());
-      });
+    this.boardData.boardEvents.subscribe(board => this.onChangedBoard(board));
+    this.boardData.boardCreatedEvents.subscribe(board => this.onCreatedBoard(board));
+  }
+
+  onCreatedBoard(e: HighscoreBoardCreatedResponse) {
+    this.swaggerService.newEntry(e.id, {
+      id: 0,
+      username: 'Dave Race', 
+      score: 53029421
+    }).subscribe(result => {
+      this.boardData.loadHighscoreBoard(e.id);
     });
   }
 
+  onChangedBoard(e: HighscoreBoard) {
+    this.list = [];
+    e.entries.forEach(element => {
+      this.list.push(element);
+    });
+  }
 }

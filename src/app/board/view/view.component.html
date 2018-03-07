@@ -1,5 +1,12 @@
-<mat-list>
-  <mat-list-item *ngFor='let entry of list; trackBy: index;'>
-    {{ entry }}
-  </mat-list-item>
-</mat-list>
+<h2>View Highscores</h2>
+<table>
+  <tr *ngFor='let entry of list; trackBy: index;'>
+    <td>
+      {{ entry.username }}
+    </td>
+    <td>:</td>
+    <td>
+        {{ entry.score }}
+    </td>
+  </tr>
+</table>
