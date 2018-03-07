@@ -1,24 +1,17 @@
+<div style="max-width: 100vw; max-height:100vh; overflow-y: scroll; overflow-x:hidden;">
+<mat-toolbar>
+  <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button><span style="flex: 0.01 auto"></span><span>highS</span>
+</mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav>S</mat-sidenav>
-  <mat-sidenav-content style="width:100vw; height:100vh">
-    <table>
-      <tr>
-        <td style="width:30vw">
-          <mat-card class="card">
-            <app-create></app-create>
-          </mat-card>
-        </td>
-        <td>
-          <mat-card class="card">
-            <app-created></app-created>
-          </mat-card>
-        </td>
-        <td>
-          <mat-card class="card">
-            <app-view></app-view>
-          </mat-card>
-        </td>
-      </tr>
-    </table>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let item of menuitems" (click)="onNavigate(item.path)">
+        {{item.title}}
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content style="width:100vw; height:100vh; max-height:100vh; overflow-y:scroll">
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+</div>

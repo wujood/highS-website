@@ -1,0 +1,7 @@
+<h3>Already got one?</h3>
+<mat-form-field>
+  <input matInput placeholder="Put in your id to view the board" [(ngModel)]="boardId">
+</mat-form-field>
+<button mat-raised-button (click)="onCreatedBoard()">Create</button>
+
+<app-board [list]="list"></app-board>

@@ -1,12 +1,2 @@
 <h2>View Highscores</h2>
-<table>
-  <tr *ngFor='let entry of list'>
-    <td>
-      {{ entry.username }}
-    </td>
-    <td>:</td>
-    <td>
-        {{ entry.score }}
-    </td>
-  </tr>
-</table>
+<app-board [list]="list"></app-board>
