@@ -10,6 +10,8 @@ import { BoardDataService } from '../../services/board-data.service';
 export class LoginComponent implements OnInit {
 
   list = [];
+  boardName: string;
+  totalCount = 0;
   boardId: number;
 
   constructor(public boardData: BoardDataService, private swaggerService: HighscoreService) { }
@@ -24,8 +26,12 @@ export class LoginComponent implements OnInit {
 
   onLoadBoard(board: HighscoreBoard) {
     this.list = [];
+    this.totalCount = board.entries.length;
+    this.boardName = board.name;
     board.entries.forEach(element => {
-      this.list.push(element);
+      if(this.list.length !== 10) {
+        this.list.push(element);
+      }
     });
   }
 }

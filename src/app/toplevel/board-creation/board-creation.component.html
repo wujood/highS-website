@@ -1,19 +1,25 @@
-<table>
-  <tr>
-    <td style="width:30vw">
+<mat-horizontal-stepper [linear]="false" #stepper="matHorizontalStepper">
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Create a new Highscore-Board</ng-template>
       <mat-card class="card">
         <app-create></app-create>
       </mat-card>
-    </td>
-    <td>
+    </form>
+  </mat-step>
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Save credentials</ng-template>
       <mat-card class="card">
         <app-created></app-created>
       </mat-card>
-    </td>
-    <td>
-      <mat-card class="card">
-        <app-view></app-view>
-      </mat-card>
-    </td>
-  </tr>
-</table>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <app-view></app-view>
+  </mat-step>
+</mat-horizontal-stepper>

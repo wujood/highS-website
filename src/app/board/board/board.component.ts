@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { HighscoreService } from '../../../swagger';
 
 @Component({
   selector: 'app-board',
@@ -7,11 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
+  @Input() name = "highS-Board"
   @Input() list = [];
+  @Input() totalCount = 0;
 
-  constructor() { }
+  constructor(public swagger: HighscoreService) { }
 
   ngOnInit() {
   }
 
+  deleteEntry(index: number) {
+    console.warn("Not implemented yet!");
+  }
 }

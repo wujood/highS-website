@@ -1,7 +1,14 @@
-<h3>Already got one?</h3>
-<mat-form-field>
-  <input matInput placeholder="Put in your id to view the board" [(ngModel)]="boardId">
-</mat-form-field>
-<button mat-raised-button (click)="onCreatedBoard()">Create</button>
-
-<app-board [list]="list"></app-board>
+<table>
+  <tr style="width: 100%">
+    <td *ngIf="list.length === 0">
+      <h3>Already got one?</h3>
+      <mat-form-field>
+        <input matInput placeholder="Put in your id to view the board" [(ngModel)]="boardId">
+      </mat-form-field>
+      <button mat-raised-button (click)="onCreatedBoard()">View</button>
+    </td>
+    <td style="width: 50%">
+      <app-board [list]="list" [name]="boardName" [totalCount]="totalCount"></app-board>
+    </td>
+  </tr>
+</table>

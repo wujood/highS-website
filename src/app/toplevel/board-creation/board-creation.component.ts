@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BoardDataService } from '../../services/board-data.service';
+import { HighscoreBoardCreatedResponse } from '../../../swagger';
+import { MatStepper } from '@angular/material';
 
 @Component({
   selector: 'app-board-creation',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardCreationComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild(MatStepper) stepper: MatStepper;
+
+  constructor(private boardData: BoardDataService) { }
 
   ngOnInit() {
+    this.boardData.boardCreatedEvents.subscribe(board => this.onCreatedBoard(board));
   }
 
+  onCreatedBoard(board: HighscoreBoardCreatedResponse) {
+    this.stepper.next();
+  }
 }

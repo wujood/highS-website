@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatSidenavModule, MatListModule, MatIconModule, MatInputModule, MatCardModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatSidenavModule, MatListModule, MatIconModule, MatInputModule, MatCardModule, MatToolbarModule, MatStepperModule} from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ApiModule } from '../swagger';
 import { ViewComponent } from './board/view/view.component';
 import { CreateComponent } from './board/create/create.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BoardDataService } from './services/board-data.service';
 import { CreatedComponent } from './board/created/created.component';
 import { LoginComponent } from './board/login/login.component';
@@ -55,7 +55,9 @@ const routes: Routes = [
     MatInputModule,
     MatCardModule,
     MatToolbarModule,
+    MatStepperModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [BoardDataService],

@@ -1,11 +1,12 @@
-<table>
-  <tr *ngFor='let entry of list'>
-    <td>
-      {{ entry.username }}
-    </td>
-    <td>:</td>
-    <td>
-        {{ entry.score }}
-    </td>
-  </tr>
-</table>
+<mat-list style="flex: 1 1 auto" *ngIf="list.length > 0">
+  <h2 mat-header>{{name}}<button *ngIf="!validSecret" mat-icon-button color="primary" (click)="editBoard()"><mat-icon>edit</mat-icon></button></h2>
+  <h3 mat-subheader>Top 10</h3>
+  <mat-list-item *ngFor='let entry of list; let i = index'>
+      <mat-icon mat-list-icon>account_circle</mat-icon>
+      <h4 mat-line>{{ entry.username }}</h4>
+      <p mat-line>{{ entry.score }}</p>
+      <span style="flex: 1 1 auto"></span>
+      <button *ngIf="!validSecret" mat-icon-button color="warn" (click)="deleteEntry(i)"><mat-icon>delete</mat-icon></button>
+  </mat-list-item>
+  <h3 mat-subheader>Total of {{totalCount}}</h3>
+</mat-list>
